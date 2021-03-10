@@ -110,12 +110,10 @@ return [
     | You can add this array to your own relations, anything you want to store
     | in Redis. We recommend caching only roles and permissions here as much as
     | possible.
+    | Example: ['permissions', 'roles.permissions']
     |
     */
-    'cache_relations' => [
-        'roles.permissions',
-        'permissions',
-    ],
+    'cache_relations' => [],
 
     /*
     |--------------------------------------------------------------------------

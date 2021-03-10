@@ -19,7 +19,7 @@ abstract class BaseMiddleware
      *
      * @return bool
      */
-    protected function setIfClaimIsNotExist($request)
+    protected function setIfClaimIsNotExist($request): bool
     {
         if ($request->claim === null) {
             /** @var Token $token */
@@ -53,7 +53,7 @@ abstract class BaseMiddleware
      *
      * @return JsonResponse The JSON-response
      */
-    public function respond($data, $statusCode, $headers = [])
+    public function respond($data, $statusCode, $headers = []): JsonResponse
     {
         return Response::json($data, $statusCode, $headers);
     }
@@ -64,13 +64,13 @@ abstract class BaseMiddleware
      * @param array $headers
      * @return JsonResponse
      */
-    public function respondWithError($exception, $statusCode, $headers = [])
+    public function respondWithError($exception, $statusCode, $headers = []): JsonResponse
     {
         $error = config('jwt-redis.errors.' . class_basename($exception)) ?? config('jwt-redis.errors.default');
 
         return $this->respond([
             'message' => $error['message'],
-            'status_code' => isset($error['code']) ? $error['code'] : $statusCode,
+            'status_code' => $error['code'] ?? $statusCode,
         ], $statusCode, $headers);
     }
 }
