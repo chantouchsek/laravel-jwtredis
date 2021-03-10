@@ -23,7 +23,7 @@ This package work with together [tymondesigns/jwt-auth](https://github.com/tymon
  
 - [nrk/predis](https://github.com/nrk/predis) **>= 1.1** (**Recommended 1.1**)
 - [tymondesigns/jwt-auth](https://github.com/tymondesigns/jwt-auth) **>= 1.0** (**Recommended 1.0.x**)
-- [spatie/laravel-permission](https://github.com/spatie/laravel-permission) **>= 3.3** (**Recommended 3.3**)
+- [spatie/laravel-permission](https://github.com/spatie/laravel-permission) **>= 3.3** (**Recommended 3.3**) (Optional)
 
 ## Installation
 
@@ -37,6 +37,8 @@ REDIS_CLIENT=predis
 ```
 Next, you will need to change the `guards` and `providers` arrays in your `config/auth.php` config as follows:
 ```php
+<?php
+return [
 'guards' => [
         'api' => [
             'driver' => 'jwt_redis',
@@ -50,6 +52,7 @@ Next, you will need to change the `guards` and `providers` arrays in your `confi
             'model' =>  App\Models\User::class, /* Your User Model */
         ],
     ],
+];
 ```
 This package uses auto-discovery to register the service provider but if you'd rather do it manually, the service provider is: add to `providers` array in your `config/app.php` config as follows:
 ```php
@@ -62,17 +65,25 @@ php artisan vendor:publish --provider='Chantouch\JWTRedis\JWTRedisServiceProvide
 
 ## Configurations
 
-When everything is done, don't forget to add this Trait to your user model.
+When everything is done, don't forget to add this Trait to your user model, if you are going to use with [spatie/laravel-permission](https://github.com/spatie/laravel-permission).
 ```php
 use JWTRedisHasRoles;
 ```
+
+When everything is done, don't forget to add this Trait to your user model, if you are not use with `laravel-permission`.
+```php
+use JWTRedis;
+```
 You need to add `$routeMiddleware` array in `app/Http/Kernel.php`
 ```php
-'auth'               => \Chantouch\JWTRedis\Http\Middleware\Authenticate::class,
-'refreshable'        => \Chantouch\JWTRedis\Http\Middleware\Refreshable::class,
-'role'               => \Chantouch\JWTRedis\Http\Middleware\RoleMiddleware::class,
-'permission'         => \Chantouch\JWTRedis\Http\Middleware\PermissionMiddleware::class,
-'role_or_permission' => \Chantouch\JWTRedis\Http\Middleware\RoleOrPermissionMiddleware::class,
+<?php
+return [
+    'auth'               => \Chantouch\JWTRedis\Http\Middleware\Authenticate::class,
+    'refreshable'        => \Chantouch\JWTRedis\Http\Middleware\Refreshable::class,
+    'role'               => \Chantouch\JWTRedis\Http\Middleware\RoleMiddleware::class, // Optional
+    'permission'         => \Chantouch\JWTRedis\Http\Middleware\PermissionMiddleware::class, // Optional
+    'role_or_permission' => \Chantouch\JWTRedis\Http\Middleware\RoleOrPermissionMiddleware::class, // Optional
+];
 ```
 
 ## Usage
@@ -111,6 +122,8 @@ You can customize some options in that package. Check `config/jwt-redis.php` fil
 
 * User Model
 ```php
+<?php
+return [
     /*
     |--------------------------------------------------------------------------
     | Your User Model
@@ -120,9 +133,12 @@ You can customize some options in that package. Check `config/jwt-redis.php` fil
     |
     */
     'user_model' => \App\Models\User::class,
+];
 ```
 * Observer
 ```php
+<?php
+return [
      /*
      |--------------------------------------------------------------------------
      | JWTRedis User Model Observer
@@ -134,9 +150,12 @@ You can customize some options in that package. Check `config/jwt-redis.php` fil
      |
      */
     'observer' => Chantouch\JWTRedis\Observers\UserRedisObserver::class,
+];
 ```
 * Events Queue
 ```php
+<?php
+return [
     /*
     |--------------------------------------------------------------------------
     | Observer Events Are Queued
@@ -148,9 +167,12 @@ You can customize some options in that package. Check `config/jwt-redis.php` fil
     |
     */
     'observer_events_queue' => true,
+];
 ```
 * Cache Time
 ```php
+<?php
+return [
     /*
     |--------------------------------------------------------------------------
     | Cache on Redis up to jwt_ttl value.
@@ -171,9 +193,12 @@ You can customize some options in that package. Check `config/jwt-redis.php` fil
     |
     */
     'redis_ttl' => 60,
+];
 ```
 * Cache Prefix
 ```php
+<?php
+return [
     /*
     |--------------------------------------------------------------------------
     | Cache Prefix
@@ -183,9 +208,12 @@ You can customize some options in that package. Check `config/jwt-redis.php` fil
     |
     */
     'redis_auth_prefix' => 'auth_',
+];
 ```
 * Banned User Check
 ```php
+<?php
+return [
     /*
     |--------------------------------------------------------------------------
     | Banned User Checking
@@ -223,9 +251,12 @@ You can customize some options in that package. Check `config/jwt-redis.php` fil
         'banned',
         'deactivate'
     ],
+];
 ```
 * Relation Caching
 ```php
+<?php
+return [
     /*
     |--------------------------------------------------------------------------
     | Cache This Relations When User Has Authenticated
@@ -240,9 +271,12 @@ You can customize some options in that package. Check `config/jwt-redis.php` fil
         'roles.permissions',
         'permissions'
     ],
+];
 ```
 * Customize Exceptions
 ```php
+<?php
+return [
     /*
     |--------------------------------------------------------------------------
     | Customize All Exception Messages and Codes
@@ -257,7 +291,8 @@ You can customize some options in that package. Check `config/jwt-redis.php` fil
            'message' => 'Your custom error message.',
            'code' => 99999
        ]
-    ]
+    ],
+];
 ```
 
 ## Example Project
