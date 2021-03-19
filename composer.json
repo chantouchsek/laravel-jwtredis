@@ -4,7 +4,7 @@
     "type": "library",
     "require": {
         "php": ">=7.2",
-        "tymon/jwt-auth": "^1.0",
+        "tymon/jwt-auth": "dev-develop",
         "predis/predis": "^1.1"
     },
     "license": "MIT",
