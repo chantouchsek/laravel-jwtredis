@@ -53,7 +53,7 @@ abstract class BaseMiddleware
      *
      * @return JsonResponse The JSON-response
      */
-    public function respond($data, $statusCode, $headers = []): JsonResponse
+    public function respond(array $data, int $statusCode, array $headers = []): JsonResponse
     {
         return Response::json($data, $statusCode, $headers);
     }
@@ -64,7 +64,7 @@ abstract class BaseMiddleware
      * @param array $headers
      * @return JsonResponse
      */
-    public function respondWithError($exception, $statusCode, $headers = []): JsonResponse
+    public function respondWithError($exception, int $statusCode, array $headers = []): JsonResponse
     {
         $error = config('jwt-redis.errors.' . class_basename($exception)) ?? config('jwt-redis.errors.default');
 

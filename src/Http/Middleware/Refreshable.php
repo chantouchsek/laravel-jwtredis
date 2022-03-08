@@ -21,12 +21,12 @@ class Refreshable extends BaseMiddleware
      *
      * @var JWTAuth
      */
-    protected $auth;
+    protected JWTAuth $auth;
 
     /**
      * @var Manager
      */
-    protected $manager;
+    protected Manager $manager;
 
     /**
      * @param JWTAuth $auth
