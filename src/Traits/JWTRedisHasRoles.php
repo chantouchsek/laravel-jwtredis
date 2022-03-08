@@ -21,7 +21,7 @@ trait JWTRedisHasRoles
      *
      * @return $this
      */
-    public function assignRole(...$roles): JWTRedisHasRoles
+    public function assignRole(...$roles)
     {
         $this->originalAssignRole(...$roles);
 
@@ -39,7 +39,7 @@ trait JWTRedisHasRoles
      *
      * @return $this
      */
-    public function givePermissionTo(...$permissions): JWTRedisHasRoles
+    public function givePermissionTo(...$permissions)
     {
         $this->originalGivePermissionTo(...$permissions);
 
