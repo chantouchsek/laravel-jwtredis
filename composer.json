@@ -3,9 +3,9 @@
     "description": "This package allows JWT-authenticated users to be stored and management in Redis with their roles, permissions, statuses and anything you want.",
     "type": "library",
     "require": {
-        "php": ">=7.2",
-        "tymon/jwt-auth": "dev-develop",
-        "predis/predis": "^1.1"
+        "php": ">=8.0",
+        "predis/predis": "^1.1",
+        "php-open-source-saver/jwt-auth": "^1.4"
     },
     "license": "MIT",
     "authors": [

@@ -21,7 +21,7 @@ trait JWTRedisHasRoles
      *
      * @return $this
      */
-    public function assignRole(...$roles)
+    public function assignRole(...$roles): JWTRedisHasRoles
     {
         $this->originalAssignRole(...$roles);
 
@@ -39,7 +39,7 @@ trait JWTRedisHasRoles
      *
      * @return $this
      */
-    public function givePermissionTo(...$permissions)
+    public function givePermissionTo(...$permissions): JWTRedisHasRoles
     {
         $this->originalGivePermissionTo(...$permissions);
 
@@ -115,7 +115,7 @@ trait JWTRedisHasRoles
     /**
      * @return bool
      */
-    public function checkUserStatus()
+    public function checkUserStatus(): bool
     {
         $column = config('jwt-redis.status_column_title');
         $values = config('jwt-redis.banned_statuses');
@@ -128,7 +128,7 @@ trait JWTRedisHasRoles
      *
      * @return string
      */
-    public function getRedisKey()
+    public function getRedisKey(): string
     {
         return config('jwt-redis.redis_auth_prefix').$this->getJWTIdentifier();
     }

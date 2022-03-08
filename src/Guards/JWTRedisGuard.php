@@ -6,8 +6,8 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Guard;
 use Chantouch\JWTRedis\Facades\RedisCache;
-use Tymon\JWTAuth\Facades\JWTAuth;
-use Tymon\JWTAuth\JWTGuard;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
+use PHPOpenSourceSaver\JWTAuth\JWTGuard;
 
 class JWTRedisGuard extends JWTGuard implements Guard
 {
@@ -20,7 +20,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
      *
      * @return bool
      */
-    public function once(array $credentials = [])
+    public function once(array $credentials = []): bool
     {
         if ($this->validate($credentials)) {
             $this->setUser($this->lastAttempted);
@@ -42,7 +42,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
      *
      * @return Authenticatable|null
      */
-    public function user()
+    public function user(): ?Authenticatable
     {
         return $this->user ?? $this->retrieveByRedis();
     }
@@ -150,7 +150,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
      *
      * @return mixed
      */
-    public function storeRedis($login = false)
+    public function storeRedis(bool $login = false)
     {
         // If is Login value true, user cached from lastAttempt object.
         // else user cached from token in request object.

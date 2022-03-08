@@ -47,7 +47,7 @@ class JWTRedisServiceProvider extends ServiceProvider
         Auth::extend('jwt_redis', function ($app, $name, array $config) {
 
             // Return an instance of Illuminate\Contracts\Auth\Guard...
-            return new JWTRedisGuard($app['tymon.jwt'], Auth::createUserProvider($config['provider']), $app['request']);
+            return new JWTRedisGuard($app['tymon.jwt'], Auth::createUserProvider($config['provider']), $app['request'], $app['events']);
         });
     }
 

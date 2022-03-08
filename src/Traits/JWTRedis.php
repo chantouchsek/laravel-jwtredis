@@ -9,7 +9,7 @@ trait JWTRedis
     /**
      * @return bool
      */
-    public function checkUserStatus()
+    public function checkUserStatus(): bool
     {
         $column = config('jwt-redis.status_column_title');
         $values = config('jwt-redis.banned_statuses');
@@ -22,7 +22,7 @@ trait JWTRedis
      *
      * @return string
      */
-    public function getRedisKey()
+    public function getRedisKey(): string
     {
         return config('jwt-redis.redis_auth_prefix').$this->getJWTIdentifier();
     }

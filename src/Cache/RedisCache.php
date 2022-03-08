@@ -51,7 +51,7 @@ class RedisCache implements RedisCacheContract
     /**
      * @return bool
      */
-    public function removeCache()
+    public function removeCache(): bool
     {
         return Cache::forget($this->key);
     }
