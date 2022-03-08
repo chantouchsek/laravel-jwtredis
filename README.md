@@ -11,19 +11,19 @@ their roles, permissions, statuses and anything you want.
 <a><img src="https://cdn.auth0.com/blog/jwtalgos/logo.png" width="80"></a>
 <a><img src="https://chris.lu/upload/images/redis.png" width="80"></a>
 
->Also this package have an observer for listening and updating  to your user model 
+>Also, this package has an observer for listening and updating  to your user model 
 on Redis. This observer is triggered `when you assign roles & permissions to user, or update
 and delete to your user` model.
 
 ## Requirements
 
-This package work with together [tymondesigns/jwt-auth](https://github.com/tymondesigns/jwt-auth) and [spatie/laravel-permission](https://github.com/spatie/laravel-permission) package under the hood.
+This package work with together [php-open-source-saver/jwt-auth:](https://github.com/php-open-source-saver/jwt-auth:) and [spatie/laravel-permission](https://github.com/spatie/laravel-permission) package under the hood.
 
 ![#](https://placehold.it/15/f03c15/000000?text=+) `Make sure to install and configure these dependencies. You must publish, migrate etc. all packages.` ![#](https://placehold.it/15/f03c15/000000?text=+)
  
 - [nrk/predis](https://github.com/nrk/predis) **>= 1.1** (**Recommended 1.1**)
-- [tymondesigns/jwt-auth](https://github.com/tymondesigns/jwt-auth) **>= 1.0** (**Recommended 1.0.x**)
-- [spatie/laravel-permission](https://github.com/spatie/laravel-permission) **>= 3.3** (**Recommended 3.3**) (Optional)
+- [php-open-source-saver/jwt-auth:](https://github.com/php-open-source-saver/jwt-auth:) **>= 1.4** (**Recommended 1.4.x**)
+- [spatie/laravel-permission](https://github.com/spatie/laravel-permission) **>= 5.5** (**Recommended 5.5**) (Optional)
 
 ## Installation
 
