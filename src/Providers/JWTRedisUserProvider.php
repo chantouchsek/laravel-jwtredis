@@ -24,9 +24,9 @@ class JWTRedisUserProvider extends EloquentUserProvider implements UserProviderC
      */
     public function retrieveByCredentials(array $credentials)
     {
-        if (empty($credentials) ||
-            (count($credentials) === 1 &&
-                Str::contains($this->firstCredentialKey($credentials), 'password'))) {
+        $credentials = array_filter($credentials, fn ($key) => ! str_contains($key, 'password'), ARRAY_FILTER_USE_KEY);
+
+        if (empty($credentials)) {
             return;
         }
 
