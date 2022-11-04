@@ -24,7 +24,7 @@ class ProcessObserver implements ShouldQueue
     private $model;
 
     /** @var string */
-    private $process;
+    private string $process;
 
     /**
      * ProcessObserver constructor.
@@ -53,7 +53,7 @@ class ProcessObserver implements ShouldQueue
     /**
      * @return mixed
      */
-    protected function deleted()
+    protected function deleted(): mixed
     {
         return RedisCache::key($this->model->getRedisKey())->removeCache();
     }
@@ -61,7 +61,7 @@ class ProcessObserver implements ShouldQueue
     /**
      * @return mixed
      */
-    protected function updated()
+    protected function updated(): mixed
     {
         // Refresh user..
         $this->model = config('jwt-redis.user_model')::find($this->model->id);
