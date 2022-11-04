@@ -20,7 +20,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
      *
      * @return bool
      */
-    public function once(array $credentials = []): bool
+    public function once(array $credentials = [])
     {
         if ($this->validate($credentials)) {
             $this->setUser($this->lastAttempted);
@@ -61,7 +61,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
      *
      * @return bool|string
      */
-    public function attempt(array $credentials = [], $login = true): bool|string
+    public function attempt(array $credentials = [], $login = true)
     {
         $this->removeAuthFromRedis();
 
@@ -85,7 +85,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
     /**
      * @return mixed
      */
-    public function retrieveByRedis(): mixed
+    public function retrieveByRedis()
     {
         return $this->request->authedUser ?? $this->getOrSetRedis();
     }
@@ -93,7 +93,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
     /**
      * @return mixed
      */
-    public function getOrSetRedis(): mixed
+    public function getOrSetRedis()
     {
         return $this->getAuthFromRedis() ?? $this->setAuthToRedis();
     }
@@ -101,7 +101,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
     /**
      * @return mixed
      */
-    public function getAuthFromRedis(): mixed
+    public function getAuthFromRedis()
     {
         return RedisCache::key($this->getRedisKeyFromClaim())->getCache();
     }
@@ -110,7 +110,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
      * @param $user
      * @return mixed
      */
-    public function refreshAuthFromRedis($user): mixed
+    public function refreshAuthFromRedis($user)
     {
         return RedisCache::key($user->getRedisKey())->data($user)->refreshCache();
     }
@@ -126,7 +126,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
     /**
      * @return string
      */
-    public function getRedisKeyFromClaim(): string
+    public function getRedisKeyFromClaim()
     {
         return 'auth_'.$this->request->claim;
     }
@@ -134,7 +134,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
     /**
      * @return mixed
      */
-    public function setAuthToRedis(): mixed
+    public function setAuthToRedis()
     {
         if ($this->request->bearerToken()) {
             return $this->storeRedis();
@@ -150,7 +150,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
      *
      * @return mixed
      */
-    public function storeRedis(bool $login = false): mixed
+    public function storeRedis(bool $login = false)
     {
         // If is Login value true, user cached from lastAttempt object.
         // else user cached from token in request object.
