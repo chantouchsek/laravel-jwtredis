@@ -43,7 +43,7 @@ class JWTRedisServiceProvider extends ServiceProvider
 
     protected function overrideJWTGuard()
     {
-        // Override JWT Guard for without DB query..
+        // Override JWT Guard for without DB query.
         Auth::extend('jwt_redis', function ($app, $name, array $config) {
 
             // Return an instance of Illuminate\Contracts\Auth\Guard...

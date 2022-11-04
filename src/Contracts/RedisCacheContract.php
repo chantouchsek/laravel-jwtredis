@@ -24,20 +24,20 @@ interface RedisCacheContract
     /**
      * @return mixed
      */
-    public function removeCache();
+    public function removeCache(): mixed;
 
     /**
      * @return mixed
      */
-    public function getCache();
+    public function getCache(): mixed;
 
     /**
      * @return mixed
      */
-    public function refreshCache();
+    public function refreshCache(): mixed;
 
     /**
      * @return mixed
      */
-    public function cache();
+    public function cache(): mixed;
 }
