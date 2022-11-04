@@ -30,7 +30,7 @@ trait JWTRedis
     /**
      * @return void
      */
-    public function triggerTheObserver()
+    public function triggerTheObserver(): void
     {
         /** @var Model $model */
         $model = $this;

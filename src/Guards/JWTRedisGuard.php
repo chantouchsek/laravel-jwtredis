@@ -61,7 +61,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
      *
      * @return bool|string
      */
-    public function attempt(array $credentials = [], $login = true)
+    public function attempt(array $credentials = [], $login = true): bool|string
     {
         $this->removeAuthFromRedis();
 
@@ -85,7 +85,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
     /**
      * @return mixed
      */
-    public function retrieveByRedis()
+    public function retrieveByRedis(): mixed
     {
         return $this->request->authedUser ?? $this->getOrSetRedis();
     }
@@ -93,7 +93,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
     /**
      * @return mixed
      */
-    public function getOrSetRedis()
+    public function getOrSetRedis(): mixed
     {
         return $this->getAuthFromRedis() ?? $this->setAuthToRedis();
     }
@@ -101,7 +101,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
     /**
      * @return mixed
      */
-    public function getAuthFromRedis()
+    public function getAuthFromRedis(): mixed
     {
         return RedisCache::key($this->getRedisKeyFromClaim())->getCache();
     }
@@ -110,7 +110,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
      * @param $user
      * @return mixed
      */
-    public function refreshAuthFromRedis($user)
+    public function refreshAuthFromRedis($user): mixed
     {
         return RedisCache::key($user->getRedisKey())->data($user)->refreshCache();
     }
@@ -134,14 +134,14 @@ class JWTRedisGuard extends JWTGuard implements Guard
     /**
      * @return mixed
      */
-    public function setAuthToRedis()
+    public function setAuthToRedis(): mixed
     {
         if ($this->request->bearerToken()) {
             return $this->storeRedis();
         }
 
         // If token not found, we need to return null.
-        // Because Laravel's need this user object even if empty.
+        // Because Laravel needs this user object even if empty.
         return null;
     }
 
@@ -150,7 +150,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
      *
      * @return mixed
      */
-    public function storeRedis(bool $login = false)
+    public function storeRedis(bool $login = false): mixed
     {
         // If is Login value true, user cached from lastAttempt object.
         // else user cached from token in request object.

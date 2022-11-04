@@ -3,15 +3,16 @@
     "description": "This package allows JWT-authenticated users to be stored and management in Redis with their roles, permissions, statuses and anything you want.",
     "type": "library",
     "require": {
-        "php": ">=8.0",
-        "predis/predis": "^1.1",
-        "php-open-source-saver/jwt-auth": "^1.4"
+        "php": ">=8.1",
+        "predis/predis": "^2.0",
+        "php-open-source-saver/jwt-auth": "^2.0"
     },
     "license": "MIT",
     "authors": [
         {
-            "name": "chantouch",
-            "email": "chantouchsek.cs83@gmail.com"
+            "name": "Chantouch Sek",
+            "email": "chantouchsek.cs83@gmail.com",
+            "role": "Owner"
         }
     ],
     "minimum-stability": "dev",
