@@ -46,7 +46,7 @@ class Refreshable extends BaseMiddleware
      * @param Closure $next
      *
      * @return JsonResponse
-     *@throws UnauthorizedHttpException
+     * @throws UnauthorizedHttpException
      *
      */
     public function handle($request, Closure $next)
@@ -58,7 +58,7 @@ class Refreshable extends BaseMiddleware
 
             /** Application needs this assignment for using Laravel's Auth facade. */
             $request->claim = $this->manager->decode(new Token($token))->get('sub');
-        } catch (TokenInvalidException | JWTException $e) {
+        } catch (TokenInvalidException|JWTException $e) {
             return $this->respondWithError($e, 401);
         }
 
@@ -96,6 +96,12 @@ class Refreshable extends BaseMiddleware
 
         $token = $token ?: $this->auth->refresh();
 
-        return $this->respond(['token' => $token], 200);
+        return response()->json([
+            'accessToken' => $token,
+            'tokenType' => 'Bearer',
+            'user' => auth()->user(),
+            'refreshToken' => auth()->refresh(),
+            'expiresIn' => auth()->factory()->getTTL() * 60,
+        ]);
     }
 }
