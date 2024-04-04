@@ -15,14 +15,14 @@ class UserRedisObserver
      * Handle the Model "updated" event.
      *
      * @param Model $model
-     * @return void
+     * @return void|string
      */
     public function updated(Model $model)
     {
         if (config('jwt-redis.observer_events_queue')) {
             dispatch((new ProcessObserver($model, __FUNCTION__)));
         } else {
-            // Refresh user..
+            // Refresh user.
             $model = config('jwt-redis.user_model')::find($model->id);
 
             return RedisCache::key($model->getRedisKey())
@@ -35,7 +35,7 @@ class UserRedisObserver
      * Handle the Model "deleted" event.
      *
      * @param Model $model
-     * @return void
+     * @return void|string
      */
     public function deleted(Model $model)
     {

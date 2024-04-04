@@ -16,7 +16,7 @@ class JWTRedisUserProvider extends EloquentUserProvider implements UserProviderC
      *
      * Retrieve a user by the given credentials.
      *
-     * !Important; I made some changes this method for eager loading user roles&permissions.
+     * !Important; I made some changes to this method for eager loading user roles&permissions.
      *
      * @param array $credentials
      *
@@ -30,9 +30,9 @@ class JWTRedisUserProvider extends EloquentUserProvider implements UserProviderC
             return;
         }
 
-        // First we will add each credential element to the query as a where clause.
-        // Then we can execute the query and, if we found a user, return it in a
-        // Eloquent User "model" that will be utilized by the Guard instances.
+        // First, we will add each credential element to the query as a where clause.
+        // Then we can execute the query and, if we find a user, return it in an
+        // Eloquent User "model" that will be used by the Guard instances.
         $query = $this->newModelQuery()->with(config('jwt-redis.cache_relations'));
 
         foreach ($credentials as $key => $value) {

@@ -3,41 +3,56 @@
 namespace Chantouch\JWTRedis\Contracts;
 
 /**
- * Interface RedisCacheContract.
+ * Interface RedisCacheContract
+ *
+ * This interface defines the contract for a Redis cache implementation.
+ * It includes methods for setting the key and data, removing, getting, refreshing, and caching data.
  */
 interface RedisCacheContract
 {
     /**
-     * @param string $key
+     * Set the key for the cache.
      *
-     * @return RedisCacheContract
+     * @param string $key The key to be used for the cache.
+     *
+     * @return RedisCacheContract Returns the instance of the class implementing this interface.
      */
     public function key(string $key): self;
 
     /**
-     * @param $data
+     * Set the data for the cache.
      *
-     * @return RedisCacheContract
+     * @param mixed $data The data to be cached.
+     *
+     * @return RedisCacheContract Returns the instance of the class implementing this interface.
      */
     public function data($data): self;
 
     /**
-     * @return mixed
+     * Remove the cache.
+     *
+     * @return mixed Returns the result of the cache removal operation.
      */
-    public function removeCache();
+    public function removeCache(): mixed;
 
     /**
-     * @return mixed
+     * Get the cache.
+     *
+     * @return mixed Returns the cached data.
      */
-    public function getCache();
+    public function getCache(): mixed;
 
     /**
-     * @return mixed
+     * Refresh the cache.
+     *
+     * @return mixed Returns the result of the cache refresh operation.
      */
-    public function refreshCache();
+    public function refreshCache(): mixed;
 
     /**
-     * @return mixed
+     * Cache the data.
+     *
+     * @return mixed Returns the result of the cache operation.
      */
-    public function cache();
+    public function cache(): mixed;
 }

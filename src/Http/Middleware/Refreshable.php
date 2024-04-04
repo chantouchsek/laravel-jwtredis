@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
-use PHPOpenSourceSaver\JWTAuth\Exceptions\JWTException;
-use PHPOpenSourceSaver\JWTAuth\Exceptions\TokenInvalidException;
-use PHPOpenSourceSaver\JWTAuth\JWTAuth;
-use PHPOpenSourceSaver\JWTAuth\Manager;
-use PHPOpenSourceSaver\JWTAuth\Token;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use Tymon\JWTAuth\JWTAuth;
+use Tymon\JWTAuth\Manager;
+use Tymon\JWTAuth\Token;
 
 class Refreshable extends BaseMiddleware
 {

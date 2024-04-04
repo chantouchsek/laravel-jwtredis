@@ -8,13 +8,13 @@ use Chantouch\JWTRedis\Contracts\RedisCacheContract;
 class RedisCache implements RedisCacheContract
 {
     /** @var mixed */
-    protected $data;
+    protected mixed $data;
 
     /** @var int */
-    private $time;
+    private int $time;
 
     /** @var string */
-    protected $key;
+    protected string $key;
 
     /**
      * @param string $key
@@ -43,7 +43,7 @@ class RedisCache implements RedisCacheContract
     /**
      * @return mixed
      */
-    public function getCache()
+    public function getCache(): mixed
     {
         return Cache::get($this->key);
     }
@@ -59,7 +59,7 @@ class RedisCache implements RedisCacheContract
     /**
      * @return bool|mixed
      */
-    public function refreshCache()
+    public function refreshCache(): mixed
     {
         if (!$this->getCache()) {
             return false;
@@ -73,7 +73,7 @@ class RedisCache implements RedisCacheContract
     /**
      * @return mixed
      */
-    public function cache()
+    public function cache(): mixed
     {
         $this->setTime();
 
@@ -83,12 +83,10 @@ class RedisCache implements RedisCacheContract
     }
 
     /**
-     * @return $this
+     * @return void
      */
-    private function setTime(): RedisCacheContract
+    private function setTime(): void
     {
         $this->time = (config('jwt-redis.redis_ttl_jwt') ? config('jwt.ttl') : config('jwt-redis.redis_ttl')) * 60;
-
-        return $this;
     }
 }

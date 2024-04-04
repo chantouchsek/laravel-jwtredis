@@ -4,9 +4,9 @@ namespace Chantouch\JWTRedis\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\JsonResponse;
-use PHPOpenSourceSaver\JWTAuth\Exceptions\JWTException;
-use PHPOpenSourceSaver\JWTAuth\Exceptions\TokenExpiredException;
-use PHPOpenSourceSaver\JWTAuth\Exceptions\TokenInvalidException;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class PermissionMiddleware extends BaseMiddleware
 {
@@ -19,7 +19,7 @@ class PermissionMiddleware extends BaseMiddleware
      *
      * @return JsonResponse|mixed
      */
-    public function handle($request, Closure $next, $permission)
+    public function handle($request, Closure $next, $permission): mixed
     {
         try {
             $this->setIfClaimIsNotExist($request);
