@@ -86,7 +86,7 @@ class Refreshable extends BaseMiddleware
      * @param null $token
      * @return JsonResponse
      */
-    protected function setAuthenticationResponse($token = null): JsonResponse
+    protected function setAuthenticationResponse($token = null)
     {
         if (config('jwt-redis.check_banned_user')) {
             if (!Auth::user()->checkUserStatus()) {

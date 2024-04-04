@@ -17,7 +17,7 @@ class Authenticate extends BaseMiddleware
      * @return JsonResponse
      * @throws Throwable
      */
-    public function handle($request, Closure $next): JsonResponse
+    public function handle($request, Closure $next)
     {
         try {
             $this->setIfClaimIsNotExist($request);
