@@ -5,14 +5,14 @@ namespace Chantouch\JWTRedis\Http\Middleware;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
-use Tymon\JWTAuth\Facades\JWTAuth;
-use Tymon\JWTAuth\Token;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
+use PHPOpenSourceSaver\JWTAuth\Token;
 
 abstract class BaseMiddleware
 {
     /**
      *  If you don't use Authentication Middleware before that Middleware,
-     *  application need to set a Claim (by Token) in Request object for
+     *  application need to set a Claim (by Token) in a Request object for
      *  using Laravel Auth facade.
      *
      * @param $request
@@ -25,7 +25,7 @@ abstract class BaseMiddleware
             /** @var Token $token */
             $token = JWTAuth::getPayload(JWTAuth::getToken());
 
-            /** Application need this assignment for using Laravel's Auth facade. */
+            /** Application needs this assignment for using Laravel's Auth facade. */
             $request->claim = $token->get('sub');
         }
 

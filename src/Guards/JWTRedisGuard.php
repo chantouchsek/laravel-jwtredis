@@ -6,8 +6,8 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Guard;
 use Chantouch\JWTRedis\Facades\RedisCache;
-use Tymon\JWTAuth\Facades\JWTAuth;
-use Tymon\JWTAuth\JWTGuard;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
+use PHPOpenSourceSaver\JWTAuth\JWTGuard;
 
 class JWTRedisGuard extends JWTGuard implements Guard
 {
@@ -52,7 +52,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
      *
      * Attempt to authenticate the user using the given credentials and return the token.
      *
-     * !Important; Made some changes to this method for banned user can't get token.
+     * !Important; Made some changes to this method, for banned user can't get token.
      *
      * @param array $credentials
      * @param bool  $login

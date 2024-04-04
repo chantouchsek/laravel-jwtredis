@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
-use Tymon\JWTAuth\Exceptions\JWTException;
-use Tymon\JWTAuth\Exceptions\TokenInvalidException;
-use Tymon\JWTAuth\JWTAuth;
-use Tymon\JWTAuth\Manager;
-use Tymon\JWTAuth\Token;
+use PHPOpenSourceSaver\JWTAuth\Exceptions\JWTException;
+use PHPOpenSourceSaver\JWTAuth\Exceptions\TokenInvalidException;
+use PHPOpenSourceSaver\JWTAuth\JWTAuth;
+use PHPOpenSourceSaver\JWTAuth\Manager;
+use PHPOpenSourceSaver\JWTAuth\Token;
 
 class Refreshable extends BaseMiddleware
 {
@@ -45,7 +45,7 @@ class Refreshable extends BaseMiddleware
      * @param Request $request
      * @param Closure $next
      *
-     * @return mixed
+     * @return JsonResponse
      *@throws UnauthorizedHttpException
      *
      */
@@ -56,7 +56,7 @@ class Refreshable extends BaseMiddleware
         try {
             $token = $this->auth->parseToken()->refresh();
 
-            /** Application need this assignment for using Laravel's Auth facade. */
+            /** Application needs this assignment for using Laravel's Auth facade. */
             $request->claim = $this->manager->decode(new Token($token))->get('sub');
         } catch (TokenInvalidException | JWTException $e) {
             return $this->respondWithError($e, 401);
@@ -71,7 +71,7 @@ class Refreshable extends BaseMiddleware
      *
      * @param Request $request
      *
-     * @return JsonResponse
+     * @return JsonResponse|void
      */
     protected function checkForToken(Request $request)
     {

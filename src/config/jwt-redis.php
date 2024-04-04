@@ -6,8 +6,8 @@ return [
     | JWTRedis User Model Observer
     |--------------------------------------------------------------------------
     |
-    | This observer class, listening all events on your user model. Is triggered
-    | when you assign roles & permissions to user, or update and delete to
+    | This observer class, listening to all events on your user model.
+    | Is triggered when you assign roles & permissions to user, or update and delete to
     | your user model.
     |
     */
@@ -20,7 +20,7 @@ return [
     |
     | If this option is true, model's events are processed as a job on queue.
     |
-    | * ~ Don't forget to run Queue Worker if this option is true. ~ *
+    | * ~ Remember to run Queue Worker if this option is true. ~ *
     |
     */
     'observer_events_queue' => env('JWT_OBSERVER_EVENTS_QUEUE', false),
@@ -93,7 +93,7 @@ return [
     |
     | If the user has one of these statuses and trying to reach your application,
     | JWTRedis throws AccountBlockedException.
-    | You can set the message (check it errors array) that will return in this
+    | You can set the message (check it an error array) that will return in this
     | exception.
     |
     */
@@ -104,7 +104,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Cache This Relations When User Has Authenticated
+    | Cache This Relations When a User Has Authenticated
     |--------------------------------------------------------------------------
     |
     | You can add this array to your own relations, anything you want to store
@@ -120,7 +120,7 @@ return [
     | Customize All Exception Messages and Codes
     |--------------------------------------------------------------------------
     |
-    | You can customize error code,message,title for your application.
+    | You can customize error code,message, title for your application.
     |
     */
     'errors' => [
