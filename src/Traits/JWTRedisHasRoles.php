@@ -3,11 +3,11 @@
 namespace Chantouch\JWTRedis\Traits;
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Permission\Traits\HasRoles as OriginalHasRole;
+use Spatie\Permission\Traits\HasRoles;
 
 trait JWTRedisHasRoles
 {
-    use OriginalHasRole {
+    use HasRoles {
         assignRole as protected originalAssignRole;
         givePermissionTo as protected originalGivePermissionTo;
     }
@@ -21,7 +21,7 @@ trait JWTRedisHasRoles
      *
      * @return $this
      */
-    public function assignRole(...$roles)
+    public function assignRole(...$roles): static
     {
         $this->originalAssignRole(...$roles);
 
@@ -39,7 +39,7 @@ trait JWTRedisHasRoles
      *
      * @return $this
      */
-    public function givePermissionTo(...$permissions)
+    public function givePermissionTo(...$permissions): static
     {
         $this->originalGivePermissionTo(...$permissions);
 
@@ -138,7 +138,7 @@ trait JWTRedisHasRoles
     /**
      * @return void
      */
-    public function triggerTheObserver()
+    public function triggerTheObserver(): void
     {
         /** @var Model $model */
         $model = $this;

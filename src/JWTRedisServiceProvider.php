@@ -16,7 +16,7 @@ class JWTRedisServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->bindRedisCache();
     }
@@ -26,7 +26,7 @@ class JWTRedisServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->publishConfig();
         $this->overrideJWTGuard();
@@ -34,16 +34,16 @@ class JWTRedisServiceProvider extends ServiceProvider
         $this->bindObservers();
     }
 
-    protected function publishConfig()
+    protected function publishConfig(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/config/jwt-redis.php', 'jwt-redis');
 
         $this->publishes([__DIR__ . '/config/jwt-redis.php' => config_path('jwt-redis.php')], 'config');
     }
 
-    protected function overrideJWTGuard()
+    protected function overrideJWTGuard(): void
     {
-        // Override JWT Guard for without DB query.
+        // Override JWT Guard for without a DB query.
         Auth::extend('jwt_redis', function ($app, $name, array $config) {
 
             // Return an instance of Illuminate\Contracts\Auth\Guard...
@@ -51,10 +51,10 @@ class JWTRedisServiceProvider extends ServiceProvider
         });
     }
 
-    protected function overrideUserProvider()
+    protected function overrideUserProvider(): void
     {
         /**
-         * Override Eloquent Provider for fetching user with role&permission query.
+         * Override Eloquent Provider for fetching user with a role&permission query.
          */
         Auth::provider('jwt_redis_user', function ($app, array $config) {
 
@@ -63,14 +63,14 @@ class JWTRedisServiceProvider extends ServiceProvider
         });
     }
 
-    protected function bindRedisCache()
+    protected function bindRedisCache(): void
     {
         $this->app->bind(RedisCacheContract::class, function ($app) {
             return new RedisCache();
         });
     }
 
-    protected function bindObservers()
+    protected function bindObservers(): void
     {
         if (class_exists(config('jwt-redis.user_model'))) {
             config('jwt-redis.user_model')::observe(config('jwt-redis.observer'));

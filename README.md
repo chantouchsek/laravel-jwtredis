@@ -8,8 +8,10 @@
 > This package allows JWT-authenticated users to be stored and management in Redis with
 their roles, permissions, statuses and anything you want.
 
+> This package is originally forked from [sametsahindogan/laravel-jwtredis](https://github.com/sametsahindogan/laravel-jwtredis)
+
 <a><img src="https://cdn.auth0.com/blog/jwtalgos/logo.png" width="80"></a>
-<a><img src="https://chris.lu/upload/images/redis.png" width="80"></a>
+<a><img src="https://camo.githubusercontent.com/4d28958330457f539357f95c739cf5763e327c0720ac3dad71f255e65fbbd41b/68747470733a2f2f63646e342e69636f6e66696e6465722e636f6d2f646174612f69636f6e732f72656469732d322f313435312f556e7469746c65642d322d3531322e706e67" width="80"></a>
 
 >Also, this package has an observer for listening and updating  to your user model 
 on Redis. This observer is triggered `when you assign roles & permissions to user, or update
@@ -17,12 +19,12 @@ and delete to your user` model.
 
 ## Requirements
 
-This package work with together [php-open-source-saver/jwt-auth:](https://github.com/php-open-source-saver/jwt-auth:) and [spatie/laravel-permission](https://github.com/spatie/laravel-permission) package under the hood.
+This package work with together [tymon/jwt-auth](https://github.com/tymondesigns/jwt-auth) and [spatie/laravel-permission](https://github.com/spatie/laravel-permission) package under the hood.
 
 ![#](https://placehold.it/15/f03c15/000000?text=+) `Make sure to install and configure these dependencies. You must publish, migrate etc. all packages.` ![#](https://placehold.it/15/f03c15/000000?text=+)
  
 - [nrk/predis](https://github.com/nrk/predis) **>= 1.1** (**Recommended 1.1**)
-- [php-open-source-saver/jwt-auth:](https://github.com/php-open-source-saver/jwt-auth:) **>= 1.4** (**Recommended 1.4.x**)
+- [tymon/jwt-auth](https://github.com/tymondesigns/jwt-auth) **>= 1.4** (**Recommended 1.4.x**)
 - [spatie/laravel-permission](https://github.com/spatie/laravel-permission) **>= 5.5** (**Recommended 5.5**) (Optional)
 
 ## Installation
@@ -105,7 +107,7 @@ Route::get("/example", "ExampleController@example")->middleware('permissions:get
 Route::get("/example", "ExampleController@example")->middleware('role_or_permission:admin|get-user');
 ```
 * To refresh the token, you can add the `refreshable` middleware to the required route. You don't need to take any action on the controller of this route;<br>
-( Also this middleware can refreshes user from Redis if necessary. )
+( Also this middleware can refresh user from Redis if necessary. )
 ```php
 Route::get("/example", "ExampleController@example")->middleware('refreshable');
 ```
@@ -220,7 +222,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | If the check_banned_user option is true, that users cannot access
-    | the your application.
+    | the application.
     |
     */
     'check_banned_user' => false,

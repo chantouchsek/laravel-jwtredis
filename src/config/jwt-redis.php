@@ -71,7 +71,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | If the check_banned_user option is true, that users cannot access
-    | the your application.
+    | the application.
     |
     */
     'check_banned_user' => env('JWT_CHECK_BANNED_USER', false),

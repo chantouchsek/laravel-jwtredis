@@ -10,9 +10,6 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Chantouch\JWTRedis\Facades\RedisCache;
 
-/**
- * Class ProcessObserver.
- */
 class ProcessObserver implements ShouldQueue
 {
     use Dispatchable;
@@ -20,7 +17,7 @@ class ProcessObserver implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    /** @var Model */
+    /** @var Model $model */
     private $model;
 
     /** @var string */
@@ -43,7 +40,7 @@ class ProcessObserver implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         $method = $this->process;
 
@@ -53,7 +50,7 @@ class ProcessObserver implements ShouldQueue
     /**
      * @return mixed
      */
-    protected function deleted()
+    protected function deleted(): mixed
     {
         return RedisCache::key($this->model->getRedisKey())->removeCache();
     }
@@ -61,9 +58,9 @@ class ProcessObserver implements ShouldQueue
     /**
      * @return mixed
      */
-    protected function updated()
+    protected function updated(): mixed
     {
-        // Refresh user..
+        // Refresh user.
         $this->model = config('jwt-redis.user_model')::find($this->model->id);
 
         return RedisCache::key($this->model->getRedisKey())

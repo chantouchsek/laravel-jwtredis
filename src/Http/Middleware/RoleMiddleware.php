@@ -3,9 +3,9 @@
 namespace Chantouch\JWTRedis\Http\Middleware;
 
 use Closure;
-use PHPOpenSourceSaver\JWTAuth\Exceptions\JWTException;
-use PHPOpenSourceSaver\JWTAuth\Exceptions\TokenExpiredException;
-use PHPOpenSourceSaver\JWTAuth\Exceptions\TokenInvalidException;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class RoleMiddleware extends BaseMiddleware
 {
@@ -17,7 +17,7 @@ class RoleMiddleware extends BaseMiddleware
      *
      * @return mixed
      */
-    public function handle($request, Closure $next, $role)
+    public function handle($request, Closure $next, $role): mixed
     {
         try {
             $this->setIfClaimIsNotExist($request);

@@ -6,8 +6,8 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Guard;
 use Chantouch\JWTRedis\Facades\RedisCache;
-use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
-use PHPOpenSourceSaver\JWTAuth\JWTGuard;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\JWTGuard;
 
 class JWTRedisGuard extends JWTGuard implements Guard
 {
@@ -20,7 +20,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
      *
      * @return bool
      */
-    public function once(array $credentials = [])
+    public function once(array $credentials = []): bool
     {
         if ($this->validate($credentials)) {
             $this->setUser($this->lastAttempted);
@@ -38,7 +38,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
      *
      * Get the currently authenticated user.
      *
-     * !Important; Made some changes this method for check authed user without db query.
+     * !Important; Made some changes to this method for check authed user without db query.
      *
      * @return Authenticatable|null
      */
@@ -52,7 +52,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
      *
      * Attempt to authenticate the user using the given credentials and return the token.
      *
-     * !Important; Made some changes this method for banned user can't get token.
+     * !Important; Made some changes to this method for banned user can't get token.
      *
      * @param array $credentials
      * @param bool  $login
@@ -61,7 +61,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
      *
      * @return bool|string
      */
-    public function attempt(array $credentials = [], $login = true)
+    public function attempt(array $credentials = [], $login = true): bool|string
     {
         $this->removeAuthFromRedis();
 
@@ -85,7 +85,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
     /**
      * @return mixed
      */
-    public function retrieveByRedis()
+    public function retrieveByRedis(): mixed
     {
         return $this->request->authedUser ?? $this->getOrSetRedis();
     }
@@ -93,7 +93,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
     /**
      * @return mixed
      */
-    public function getOrSetRedis()
+    public function getOrSetRedis(): mixed
     {
         return $this->getAuthFromRedis() ?? $this->setAuthToRedis();
     }
@@ -101,7 +101,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
     /**
      * @return mixed
      */
-    public function getAuthFromRedis()
+    public function getAuthFromRedis(): mixed
     {
         return RedisCache::key($this->getRedisKeyFromClaim())->getCache();
     }
@@ -110,7 +110,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
      * @param $user
      * @return mixed
      */
-    public function refreshAuthFromRedis($user)
+    public function refreshAuthFromRedis($user): mixed
     {
         return RedisCache::key($user->getRedisKey())->data($user)->refreshCache();
     }
@@ -118,7 +118,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
     /**
      * @return mixed
      */
-    public function removeAuthFromRedis()
+    public function removeAuthFromRedis(): mixed
     {
         return RedisCache::key($this->getRedisKeyFromClaim())->removeCache();
     }
@@ -126,7 +126,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
     /**
      * @return string
      */
-    public function getRedisKeyFromClaim()
+    public function getRedisKeyFromClaim(): string
     {
         return 'auth_'.$this->request->claim;
     }
@@ -134,7 +134,7 @@ class JWTRedisGuard extends JWTGuard implements Guard
     /**
      * @return mixed
      */
-    public function setAuthToRedis()
+    public function setAuthToRedis(): mixed
     {
         if ($this->request->bearerToken()) {
             return $this->storeRedis();
@@ -150,10 +150,10 @@ class JWTRedisGuard extends JWTGuard implements Guard
      *
      * @return mixed
      */
-    public function storeRedis(bool $login = false)
+    public function storeRedis(bool $login = false): mixed
     {
         // If is Login value true, user cached from lastAttempt object.
-        // else user cached from token in request object.
+        // Else user cached from token in a request object.
         if (!$login) {
             return RedisCache::key($this->getRedisKeyFromClaim())
                 ->data(JWTAuth::parseToken()->authenticate()->load(config('jwt-redis.cache_relations')))
